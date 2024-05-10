@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <title>Formulario</title>
+    <style> label.error{color: red;}</style>
+  </head>
+  <body>
+    <!-- Necesito El nombre y apellido deben ocupar seis columnas cada uno. El nivel educativo debe ocupar doce columnas. 
+        Por ultimo el pais y la provincia deben ocupar la mitad cada uno (seis columnas). Y las observaciones el total de las columnas (doce). -->
+    <!-- Datos:
+                            Nombre (requerido, max 100)
+                            Apellido (requerido, max 100, min 2)
+                            Nivel Educativo (requerido)
+                            valores: primario, secundario, terciario, universitario
+                            radio
+                            Pais (requerido)
+                            combo
+                            Provincia (requerido)
+                            combo (debe ser cargado en base a lo seleccionado en el pais: evento onChange)
+                            Observaciones (opcional)
+                            textarea (4 filas) -->
+
+    <div class="container d-flex align-items-center" style="height: 100vh">
+      <form
+        id="Formulario"
+        class="row g-3 needs-validation p-3"
+        style="
+          border: 2px solid var(--bs-gray-200);
+          border-radius: 2rem;
+          background-color: var(--bs-gray-200);
+        "
+        novalidate
+      >
+        <!-- inicio formulario -->
+        <div class="col-md-6 position-relative"> <!-- Nombre -->
+          <label for="Nombre" class="form-label">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Nombre"
+            name="Nombre"
+            value=""
+            maxlength="30"
+            required
+          />
+        </div>
+        <div class="col-md-6 position-relative">     <!-- Apellido -->
+          <label for="Apellido" class="form-label">Apellido</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Apellido"
+            name="Apellido"
+            value=""
+            maxlength="30"
+            required
+          />
+        </div>
+        <div class="row mt-2">
+          <p >Nivel educativo</p>
+          <div class="col-12">
+            <div class="form-check form-check-inline m-3">
+              <label class="form-check-label" for="radio1" name="radiosbtn">Primario</label>
+              <input
+                type="radio"
+                class="form-check-input"
+                id="radio1"
+                name="radiosbtn"
+                required
+              />
+            </div>
+            <div class="form-check form-check-inline m-3">
+              <label class="form-check-label" for="radio2" name="radiosbtn">Secundario</label>
+              <input
+                type="radio"
+                class="form-check-input"
+                id="radio2"
+                name="radiosbtn"
+                required
+              />
+            </div>
+            <div class="form-check form-check-inline m-3">
+              <label class="form-check-label" for="radio3" name="radiosbtn">Terciario</label>
+              <input
+                type="radio"
+                class="form-check-input"
+                id="radio3"
+                name="radiosbtn"
+                required
+              />
+            </div>
+            <div class="form-check form-check-inline m-3">
+              <label class="form-check-label" for="radio4" name="radiosbtn">Universitario</label>
+              <input
+                type="radio"
+                class="form-check-input"
+                id="radio4"
+                name="radiosbtn"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        
+        <div class="row"> <!-- Pais  y provincia-->
+          <div class="mb-3 col-6"> <!-- Pais -->
+            <select class="form-select" id="Pais" name="Pais" aria-label="select example">
+              <option name="pais" value="">Pais</option>
+              <option name="pais" value="1">Argentina</option>
+              <option name="pais" value="2">Brazil</option>
+              <option name="pais" value="3">Chile</option>
+            </select>
+          </div>
+          <div class="mb-3 col-6"> <!-- Provincia -->
+            <select class="form-select" id="provincia" name="Provincia"aria-label="select example">
+              <option value="">Provincia</option>
+              <option value="1" name="Provincia" id="ARG">Cordoba</option>
+              <option value="2" name="Provincia" id="ARG">Buenos Aires</option>
+              <option value="3" name="Provincia" id="BR">Bhaía</option>
+              <option value="4" name="Provincia" id="BR">Rio de janeiro</option>
+              <option value="5" name="Provincia" id="CL">Santiago</option>
+              <option value="6" name="Provincia" id="CL">Curicó</option>
+            </select>
+          </div>
+        </div>
+        <div class="container mb-3"> <!-- Observaciones -->
+          <div class="form-floating">
+            <label for="Observaciones" id="observacion">Observaciones</label>
+            <textarea
+              class="form-control"
+              placeholder="Observaciones"
+              id="Observaciones"
+              name="Observaciones"
+              rows="4"
+            ></textarea>
+          </div>
+        </div>
+        <div class="col-12 d-flex justify-content-center"> <!-- Boton enviar -->
+            <button type="submit" class="btn btn-primary col-12">Enviar</button>
+        </div>
+      </form>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+    <script>
+
+  $(document).ready(function() {
+
+    
+    var ProvinciasPais={ 
+      1: ["Cordoba","Buenos Aires"],
+      2: ["Bhaía","Rio de janeiro"],
+      3: ["Santiago","Curico"]
+      };
+      
+      function actualizarProvincias(paisSeleccionado){
+        var provincias = ProvinciasPais[paisSeleccionado]
+      
+        $("#provincia").empty();
+
+        provincias.forEach(function(provincia, index) {
+        $("#provincia").append(`<option value="${index + 1}"> ${provincia} </options>`)
+             
+      
+      })
+      } 
+      $("#Pais").change(function(){
+        var paisSeleccionado = $(this).val();
+
+        if(paisSeleccionado !==""){
+          actualizarProvincias(parseInt(paisSeleccionado))
+        }
+        else{
+          $("#Provincia").empty();
+        }
+      })
+      $('#Observaciones').click(function() {
+           $('#observacion').hide();
+        });
+       
+        
+
+     
+
+    $("#Formulario").validate({
+      rules: {
+        Nombre: { required: true, maxlength: 30 },
+        Apellido: { required: true, maxlength: 30 },
+        radiosbtn: { required: true },
+        Pais: { required: true },
+        Provincia: { required: true }
+      },
+      messages: {
+        Nombre: { required: "Ingrese el nombre", maxlength: "El nombre no puede tener más de 30 caracteres" },
+        Apellido: { required: "Ingrese el Apellido", maxlength: "El Apellido no puede tener más de 30 caracteres" },
+        radiosbtn: "Seleccione el nivel eduacativo",
+        Pais: "Seleccione un país",
+        Provincia: "Seleccione una provincia"
+      },
+      
+        submitHandler:function(form,event){
+          event.preventDefault();
+          var nivelEducativo = $('input[name="radiosbtn"]:checked').siblings('label').text();
+
+
+          console.log(nivelEducativo);
+
+          
+          var DataForm={
+            Nombre: $("#Nombre").val(), 
+            Apellido: $("#Apellido").val(), 
+            NivelEducativo: nivelEducativo,
+            Pais: $("#Pais option:selected").text(),
+            Provincia: $("#provincia option:selected").text(),
+            Observaciones: $("#Observaciones").val()
+          }
+          localStorage.setItem('DataForm', JSON.stringify(DataForm));
+
+
+
+          alert("FORMULARIO ENVIADO")
+
+         
+        //  form.submit();
+         window.location.href = "info.html";
+     }
+    });
+   
+
+    
+
+
+    var dataForm = JSON.parse(localStorage.getItem('DataForm'));
+    console.log(dataForm);
+
+
+  });
+
+
+    </script>
+  </body>
+</html>
+
+

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información del Formulario</title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+    <div class="container mt-5 d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="card p-4" >
+            <div class="card-body">
+                <h5 class="card-title" >Información del Formulario</h5>
+                <p class="card-text">Nombre: <span id="nombre"></span></p>
+                <p class="card-text">Apellido: <span id="apellido"></span></p>
+                <p class="card-text">Nivel Educativo: <span id="nivel"></span></p>
+                <p class="card-text">País: <span id="pais"></span></p>
+                <p class="card-text">Provincia: <span id="provincia"></span></p>
+                <p class="card-text">Observaciones: <span id="observaciones"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Recuperar datos del localStorage
+    var dataForm = JSON.parse(localStorage.getItem('DataForm'));
+   
+    // Mostrar datos en el card
+    document.getElementById('nombre').textContent = dataForm.Nombre;
+    document.getElementById('apellido').textContent = dataForm.Apellido;
+    document.getElementById('pais').textContent = dataForm.Pais;
+    document.getElementById('provincia').textContent = dataForm.Provincia;
+    document.getElementById('observaciones').textContent = dataForm.Observaciones;
+    document.getElementById('nivel').textContent = dataForm.NivelEducativo;
+
+    console.log(dataForm);
+    
+   
+    });
+
+    </script>
+</body>
+</html>

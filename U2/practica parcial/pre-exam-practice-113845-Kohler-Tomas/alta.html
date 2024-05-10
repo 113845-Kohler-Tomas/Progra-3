@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alta de Piloto</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    li.error{color:red;}
+    #errorContainer ul { list-style-type: none; padding: 0;} /* Estilos para la lista de errores */
+    #errorContainer ul li { margin-bottom: 5px; } /* Espaciado entre los ítems de la lista */
+  </style>
+</head>
+<body>
+  <div class="container d-flex align-items-center justify-content-center" style="height: 100vh">
+    <form id="altaPilotoForm" class="p-5 col-8" style="border: 2px solid black; border-radius: 2rem">
+      <h2 class="mb-4">Alta de Piloto</h2>
+      <div class="mb-3 col-12">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="30" required />
+      </div>
+      <div class="mb-3 col-12">
+        <label for="apellido" class="form-label">Apellido</label>
+        <input type="text" class="form-control" id="apellido" name="apellido" maxlength="20" required />
+      </div>
+      <div class="col-12">
+        <div class="mb-3 col-6">
+          <label for="horasVuelo" class="form-label">Cantidad de horas de vuelo</label>
+          <input type="number" class="form-control" id="horasVuelo" name="horasVuelo" min="50" required />
+        </div>
+        <div class="mb-3 col-12">
+          <label for="tipoVuelo" class="form-label">Tipo de vuelo</label><br />
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tipoVuelo" id="cabotaje" value="Cabotaje" required />
+            <label class="form-check-label" for="cabotaje">Cabotaje</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tipoVuelo" id="internacional" value="Internacional" required />
+            <label class="form-check-label" for="internacional">Internacional</label>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 col-12">
+        <label for="nacionalidad" class="form-label">Nacionalidad</label>
+        <select class="form-control" id="nacionalidad" name="nacionalidad" required>
+          <option value="">Seleccionar</option>
+          <option value="Argentina">Argentina</option>
+          <option value="Uruguay">Uruguay</option>
+          <option value="Chile">Chile</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary col-12">Registrar Piloto</button>
+      <button type="button" class="btn btn-primary col-12 mt-3" id="volver">Volver</button>
+      <!-- Contenedor para mostrar errores -->
+      <div id="errorContainer" class="mt-3"></div>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+  
+
+  <script>
+    $(document).ready(function() {
+      $("#altaPilotoForm").validate({
+        rules: {
+          nombre: { required: true, maxlength: 30 },
+          apellido: { required: true, maxlength: 20 },
+          horasVuelo: { required: true, min: 50 },
+          tipoVuelo: { required: true },
+          nacionalidad: { required: true }
+        },
+        messages: {
+          nombre: { required: "Ingrese el nombre", maxlength: "El nombre no puede tener más de 30 caracteres" },
+          apellido: { required: "Ingrese el apellido", maxlength: "El apellido no puede tener más de 20 caracteres" },
+          horasVuelo: { required: "Ingrese las horas de vuelo", min: "La cantidad de horas debe ser al menos de 50" },
+          tipoVuelo: { required: "Debe elegir el tipo de vuelo" },
+          nacionalidad: { required: "Seleccione la nacionalidad" }
+        },
+        errorClass: 'error', // Utiliza la clase 'error' para los mensajes de error
+        errorElement: 'li', // Usa un elemento <li> para mostrar los mensajes de error
+        errorPlacement: function(error, element) {
+          // Muestra los mensajes de error dentro del contenedor #errorContainer
+          error.appendTo('#errorContainer'); // Agrega los errores como ítems de lista
+        },
+        submitHandler: function(form) {
+          // Limpiar el contenedor de errores antes de enviar el formulario
+          $('#errorContainer').empty();
+          alert("Registro exitoso");
+          form.submit(); // Envía el formulario después de mostrar el mensaje
+        }
+      });
+      $("#volver").click(function() {
+        // Redirige a la página "login.html"
+        window.location.href = "login.html";
+    });
+})
+  </script>
+</body>
+</html>

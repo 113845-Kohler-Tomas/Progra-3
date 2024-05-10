@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .error {
+      color: red; 
+    }
+  </style>
+</head>
+<body>
+  <div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <form id="loginForm" class="p-5 col-8" style="border: 2px solid black; border-radius: 2rem;">
+      <div class="mb-3 col-12">
+        <label for="Usuario" class="form-label">Usuario (Email)</label>
+        <input type="text" class="form-control" id="Usuario" name="Usuario">
+      </div>
+      <div class="mb-3 col-12">
+        <label for="Contraseña" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="Contraseña" name="Contraseña">
+      </div>
+      <button type="submit" class="btn btn-primary col-12">Iniciar Sesión</button>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#loginForm').validate({
+        rules: {
+          Usuario: {
+            required: true,
+            email: true   
+          },
+          Contraseña: {
+            required: true
+          }
+        },
+        messages: {
+          Usuario: {
+            required: "Por favor ingresa tu email",
+            email: "Por favor ingresa un email válido"
+          },
+          Contraseña: {
+            required: "Por favor ingresa tu contraseña"
+          }
+        },
+        submitHandler: function(form) {
+          var email = $('#Usuario').val();
+          var password = $('#Contraseña').val();
+
+          // Verifica las credenciales
+          if (email === "tup2022@tup.com.ar" && password === "123456") {
+            // Redirecciona a la siguiente página
+            window.location.href = "alta.html";
+          } else {
+            // Muestra mensaje de error
+            alert("Credenciales incorrectas. Por favor intenta de nuevo.");
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

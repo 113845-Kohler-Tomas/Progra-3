@@ -1,0 +1,36 @@
+/* --Nutmeg: hsl(14, 45%, 36%)
+--Dark Raspberry: hsl(332, 51%, 32%) */
+
+
+html{
+ background-color: hsl(29, 53%, 90%);display: flex;
+ flex-direction: column;
+ align-items: center;
+
+}
+h3{color: hsl(332, 51%, 32%);
+    }
+.subtitulo{color: hsl(14, 45%, 36%);}
+body{
+    background-color: hsl(0, 0%, 100%);
+   
+    
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px;
+    
+    
+}
+.contenedorPrincipal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Banner{
+    height: 400px;
+    width: 1000px;
+    margin-top: px;
+    border-radius: 2rem;
+}
